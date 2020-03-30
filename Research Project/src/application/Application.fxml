@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="600.0" minWidth="900.0" prefHeight="613.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ApplicationController">
+   <children>
+      <VBox layoutX="-1.0" prefHeight="65.0" prefWidth="900.0">
+         <children>
+            <MenuBar prefHeight="25.0" prefWidth="1496.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                        <Menu mnemonicParsing="false" text="Add Test">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Dictionary Attack Test" />
+                              <MenuItem mnemonicParsing="false" text="Brute Force Attack Test" />
+                              <MenuItem mnemonicParsing="false" text="Test Both" />
+                          </items>
+                        </Menu>
+                        <MenuItem mnemonicParsing="false" text="Export Test Results" />
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="View">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Previous Tests" />
+                  </items>
+                </Menu>
+                  <Menu mnemonicParsing="false" text="Edit">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Previous Tests" />
+                     </items>
+                  </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <ToolBar prefHeight="40.0" prefWidth="200.0">
+              <items>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="171.0" text="Create New Test" textAlignment="CENTER" textFill="#2b36d1">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                <Button fx:id="btn_CreateNewDictionaryTest" mnemonicParsing="false" onAction="#OnClick" text="Dictionary Attack" />
+                  <Separator prefHeight="30.0" prefWidth="18.0" />
+                  <Button fx:id="btn_CreateNewBruteForceAttack" mnemonicParsing="false" onAction="#ConfigureBruteForceAttack" text="Brute Force Attack" />
+                  <Separator prefHeight="30.0" prefWidth="18.0" />
+                  <Button fx:id="btn_TestBoth" mnemonicParsing="false" onAction="#ConfigureTestBothAttack" text="Test Both" />
+                  <Separator prefHeight="30.0" prefWidth="54.0" />
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="162.0" text="Previous Tests" textAlignment="CENTER" textFill="#cf692b">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Button mnemonicParsing="false" text="View All --&gt;" />
+              </items>
+            </ToolBar>
+         </children>
+      </VBox>
+      <ScrollPane fx:id="ScrollPane_MainTestPain" layoutY="80.0" prefHeight="533.0" prefWidth="900.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="538.0" prefWidth="900.0">
+               <children>
+                  <HBox alignment="CENTER" layoutX="197.0" layoutY="11.0" prefHeight="56.0" prefWidth="699.0">
+                     <children>
+                        <Label text="Test Name">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Separator orientation="VERTICAL" prefHeight="56.0" prefWidth="34.0" />
+                        <TextField fx:id="tf_TestName" />
+                        <Separator orientation="VERTICAL" prefHeight="56.0" prefWidth="80.0" />
+                        <Label text="Description">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Separator orientation="VERTICAL" prefHeight="56.0" prefWidth="34.0" />
+                        <TextArea fx:id="ta_TestInformation" prefHeight="56.0" prefWidth="153.0" />
+                     </children>
+                  </HBox>
+                  <Label layoutX="29.0" layoutY="20.0" prefHeight="38.0" prefWidth="162.0" text="Dictionary Attack" textFill="#f17325">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Accordion fx:id="accordian_mainWindows" layoutX="8.0" layoutY="88.0" prefHeight="373.0" prefWidth="870.0">
+                    <panes>
+                      <TitledPane text="Dictionary Selection">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                  <AnchorPane layoutX="14.0" layoutY="13.0" minHeight="0.0" minWidth="0.0" prefHeight="280.0" prefWidth="254.0">
+                                       <children>
+                                          <Label fx:id="lbl_DictionaryList" layoutX="140.0" layoutY="14.0" prefHeight="30.0" prefWidth="749.0" text="None Selected" textFill="#f00707">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="25.0" layoutY="15.0" prefHeight="17.0" prefWidth="123.0" text="Selected List" textAlignment="CENTER">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                        <Button fx:id="btn_NewDictionaryList" layoutX="25.0" layoutY="123.0" mnemonicParsing="false" onAction="#LoadNewDictionaryWindow" prefHeight="46.0" prefWidth="190.0" text="Select Dictionary List">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Button>
+                                          <Pane fx:id="pane_DictionaryAnalysisProgress" layoutX="210.0" layoutY="64.0" prefHeight="198.0" prefWidth="577.0">
+                                             <children>
+                                                <VBox layoutX="115.0" layoutY="68.0" prefHeight="92.0" prefWidth="400.0">
+                                                   <children>
+                                                      <AnchorPane>
+                                                         <children>
+                                                            <Label fx:id="lbl_DictionaryAnalysisProgress" layoutX="70.0" prefHeight="17.0" prefWidth="101.0" text="Loading..." />
+                                                         </children>
+                                                      </AnchorPane>
+                                                      <VBox alignment="CENTER" prefHeight="114.0" prefWidth="400.0">
+                                                         <children>
+                                                            <HBox alignment="CENTER" minWidth="400.0" prefHeight="65.0" prefWidth="520.0">
+                                                               <children>
+                                                                  <ProgressBar fx:id="progressBar_RunDictionaryAnalysis1" prefHeight="18.0" prefWidth="259.0" progress="0.0" />
+                                                               </children>
+                                                            </HBox>
+                                                            <Pane prefHeight="32.0" prefWidth="322.0">
+                                                               <children>
+                                                                  <HBox alignment="CENTER" layoutX="35.0" prefHeight="17.0" prefWidth="282.0">
+                                                                     <children>
+                                                                        <Label prefHeight="17.0" prefWidth="106.0" text="Words Analyzed: " />
+                                                                        <Label fx:id="lbl_TotalWordsCounter" prefHeight="17.0" prefWidth="97.0" text="None" />
+                                                                     </children>
+                                                                  </HBox>
+                                                               </children>
+                                                            </Pane>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </VBox>
+                                                <Button fx:id="btn_RunDictionaryAnalysis" layoutX="180.0" layoutY="22.0" mnemonicParsing="false" onAction="#AnalyzeSelectedDictionary" text="Run  Dictionary  Analysis Tool" />
+                                                <Button fx:id="btn_ViewDictionaryTestResults" layoutX="372.0" layoutY="21.0" mnemonicParsing="false" onAction="#LoadDictionaryResultsWindow" text="View Results" />
+                                                <Separator layoutX="76.0" layoutY="51.0" orientation="VERTICAL" prefHeight="73.0" prefWidth="54.0" />
+                                             </children>
+                                          </Pane>
+                                          <Label fx:id="lbl_DictionaryListPath" layoutX="25.0" layoutY="44.0" prefHeight="17.0" prefWidth="814.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </TitledPane>
+                      <TitledPane animated="false" text="Brute Force Settings">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        </content>
+                      </TitledPane>
+                      <TitledPane animated="false" text="Password List">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        </content>
+                      </TitledPane>
+                        <TitledPane animated="false" text="Test Settings">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Button layoutX="332.0" layoutY="107.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="130.0" text="Begin Test" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </TitledPane>
+                    </panes>
+                  </Accordion>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

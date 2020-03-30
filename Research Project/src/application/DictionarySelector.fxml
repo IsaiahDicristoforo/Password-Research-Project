@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="388.0" minWidth="400.0" prefHeight="422.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DictionarySelectorController">
+   <children>
+      <HBox alignment="CENTER" layoutX="-1.0" layoutY="14.0" prefHeight="100.0" prefWidth="650.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="98.0" prefWidth="577.0" style="-fx-border-color: blue; -fx-border-radius: 10px; -fx-label-padding: 20px; -fx-border-width: 2px;" text="Select A Dictionary">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <Button fx:id="btn_submit" layoutX="268.0" layoutY="362.0" mnemonicParsing="false" onAction="#OnSubmit" prefHeight="25.0" prefWidth="114.0" text="Confirm" />
+      <Button fx:id="btn_AddYourOwndictionary" layoutX="258.0" layoutY="134.0" mnemonicParsing="false" onAction="#on_btn_AddYourOwndictionary" text="Add A New Dictionary" />
+      <Label layoutX="13.0" layoutY="165.0" text="Previously Selected" />
+      <ListView fx:id="DictionaryPathList" layoutY="192.0" prefHeight="151.0" prefWidth="650.0" />
+      <Button fx:id="RemoveAllButton" layoutX="546.0" layoutY="161.0" mnemonicParsing="false" onAction="#RemoveEntries" prefHeight="25.0" prefWidth="89.0" text="Remove All" />
+   </children>
+</AnchorPane>
