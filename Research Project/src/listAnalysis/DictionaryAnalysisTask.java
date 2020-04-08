@@ -18,6 +18,7 @@ import java.util.stream.Stream;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventType;
+import javafx.scene.control.ProgressBar;
 
 public class DictionaryAnalysisTask extends Task<DictionaryAnalysisResult> {
 
@@ -32,6 +33,7 @@ public class DictionaryAnalysisTask extends Task<DictionaryAnalysisResult> {
 	@Override
 	protected DictionaryAnalysisResult call() throws Exception {
 		DictionaryAnalysisResult result = new DictionaryAnalysisResult();
+		
 
 		FileReader fileReader = new FileReader(filePath);
 		BufferedReader reader = new BufferedReader(fileReader);

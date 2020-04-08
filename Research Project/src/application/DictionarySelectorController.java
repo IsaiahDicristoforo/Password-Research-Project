@@ -38,7 +38,6 @@ public class DictionarySelectorController {
 	@FXML private Button btn_submit;
 	
 
-
 	@FXML
 	public void initialize() {
 
@@ -89,6 +88,16 @@ public class DictionarySelectorController {
 	         
 	         ArrayList<DictionaryList> items = objectInFile.getItems();
 	        
+	         ArrayList<DictionaryList> itemsToRemove = new ArrayList<DictionaryList>();
+	        for(int i = 0; i < items.size(); i++) {
+	        	if(!new File(items.get(i).getFilePath()).exists()) {
+	        		itemsToRemove.add(items.get(i));
+	        	}
+	        		
+	        }
+	        
+	        items.removeAll(itemsToRemove);
+	         
 	         for(int i = 0;  i < items.size(); i++) {
 	        	 DictionaryPathList.getItems().add(items.get(i));
 	         }

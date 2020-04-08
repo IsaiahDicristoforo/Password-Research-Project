@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -9,6 +10,7 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
@@ -178,14 +180,55 @@
                       </TitledPane>
                       <TitledPane animated="false" text="Password List">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Accordion layoutX="2.0" layoutY="100.0" prefHeight="166.0" prefWidth="865.0">
+                                      <panes>
+                                        <TitledPane animated="false" prefHeight="202.0" prefWidth="865.0" text="Generate Password List" textFill="#d00909">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="863.0">
+                                                   <children>
+                                                      <Button fx:id="btn_AddWordsToList" layoutX="16.0" layoutY="66.0" mnemonicParsing="false" onAction="#AddGeneratedPasswordsToList" prefHeight="25.0" prefWidth="127.0" text="Add Words To List" />
+                                                      <ChoiceBox fx:id="choiceBox_PasswordSource" layoutX="333.0" layoutY="66.0" prefWidth="150.0" />
+                                                      <Label layoutX="333.0" layoutY="41.0" text="Word Source" />
+                                                      <TextField fx:id="textField_TotalPasswordsToAdd" layoutX="195.0" layoutY="69.0" prefHeight="25.0" prefWidth="80.0" />
+                                                      <Label layoutX="195.0" layoutY="41.0" text="Total Words To Add" />
+                                                      <Label layoutX="522.0" layoutY="30.0" text="Append Characters" />
+                                                      <TextField fx:id="textField_TotalCharactersToAppend" layoutX="621.0" layoutY="88.0" prefHeight="25.0" prefWidth="54.0" />
+                                                      <ChoiceBox fx:id="choiceBox_AppendOptions" layoutX="519.0" layoutY="53.0" prefWidth="150.0" />
+                                                      <Label layoutX="519.0" layoutY="92.0" text="Total To Append" />
+                                                      <Label layoutX="696.0" layoutY="30.0" text="Prepend Characters" />
+                                                      <TextField fx:id="textField_TotalCharactersToPrepend" layoutX="795.0" layoutY="88.0" prefHeight="25.0" prefWidth="54.0" />
+                                                      <ChoiceBox fx:id="choiceBox_PrependOptions" layoutX="693.0" layoutY="53.0" prefWidth="150.0" />
+                                                      <Label layoutX="696.0" layoutY="92.0" prefHeight="17.0" prefWidth="97.0" text="Total To Prepend" />
+                                                      <Button fx:id="btn_SpecifyPasswordListGenerationLocation" layoutX="21.0" layoutY="37.0" mnemonicParsing="false" onAction="#getPasswordOutput" text="Select List Location" />
+                                                      <Label layoutX="29.0" layoutY="105.0" text="Password List Size" />
+                                                      <Label fx:id="label_generatedListSize" layoutX="137.0" layoutY="105.0" text="0" />
+                                                   </children>
+                                                </AnchorPane>
+                                          </content>
+                                        </TitledPane>
+                                      </panes>
+                                    </Accordion>
+                                    <Label layoutX="14.0" layoutY="14.0" text="Choose  A Password List For Our Program To Try To Crack" />
+                                    <Button fx:id="btn_AddUnhashedPasswordList" layoutX="368.0" layoutY="10.0" mnemonicParsing="false" onAction="#SelectUnhashedFile" prefHeight="25.0" prefWidth="80.0" text="Unhashed" />
+                                    <Button fx:id="btn_AddHashedPasswordList" layoutX="469.0" layoutY="10.0" mnemonicParsing="false" onAction="#SelectHashedFile" prefHeight="25.0" prefWidth="80.0" text="Hashed" />
+                                    <Label layoutX="14.0" layoutY="60.0" prefHeight="17.0" prefWidth="134.0" text="Selected Password List:" />
+                                    <Label fx:id="lbl_selectedPasswordList" layoutX="154.0" layoutY="60.0" prefHeight="17.0" prefWidth="707.0" />
+                                 </children></AnchorPane>
                         </content>
                       </TitledPane>
-                        <TitledPane animated="false" text="Test Settings">
+                        <TitledPane animated="false" text="Begin Test">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Button layoutX="332.0" layoutY="107.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="130.0" text="Begin Test" />
+                                    <Button fx:id="btn_beginTest" layoutX="28.0" layoutY="120.0" mnemonicParsing="false" onAction="#beginDictionaryAttack" prefHeight="58.0" prefWidth="130.0" text="Begin Test" />
+                                    <TextField fx:id="textField_TotalWordsInDicrionaryList" layoutX="578.0" layoutY="145.0" />
+                                    <Label layoutX="578.0" layoutY="128.0" text="Total Words 'In Dicrionary" />
+                                    <Spinner editable="true" layoutX="305.0" layoutY="95.0" prefHeight="40.0" prefWidth="114.0" />
+                                    <Label layoutX="264.0" layoutY="77.0" prefHeight="17.0" prefWidth="196.0" text="Total Passwords To Crack At A Time" />
+                                    <Spinner editable="true" layoutX="312.0" layoutY="182.0" prefHeight="40.0" prefWidth="114.0" />
+                                    <Label layoutX="210.0" layoutY="159.0" prefHeight="17.0" prefWidth="318.0" text="Total Threads To Dedicate To Cracking A Single Password" />
                                  </children>
                               </AnchorPane>
                           </content>

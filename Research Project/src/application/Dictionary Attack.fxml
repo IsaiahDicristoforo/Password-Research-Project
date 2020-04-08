@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minWidth="1269.0" prefHeight="804.0" prefWidth="1515.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DictionaryAttackController">
+   <children>
+      <Label layoutX="538.0" layoutY="14.0" prefHeight="78.0" prefWidth="533.0" text="Dictionary Attack Progress">
+         <font>
+            <Font name="Arial Black" size="35.0" />
+         </font>
+      </Label>
+      <Pane layoutX="538.0" layoutY="96.0" prefHeight="142.0" prefWidth="533.0">
+         <children>
+            <ProgressBar fx:id="pgb_OverallProgress" layoutX="13.0" layoutY="47.0" prefHeight="48.0" prefWidth="322.0" progress="0.0" />
+            <Label layoutX="13.0" layoutY="14.0" text="Overall Progress" textFill="#f20d0d">
+               <font>
+                  <Font name="Arial Black" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="352.0" layoutY="36.0" prefHeight="19.0" prefWidth="131.0" text="Total Checked">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="215.0" layoutY="14.0" prefHeight="31.0" prefWidth="80.0" text="0.0%" textFill="#f20d0d">
+               <font>
+                  <Font name="Arial Black" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="352.0" layoutY="61.0" prefHeight="19.0" prefWidth="131.0" text="Cracked" textFill="#4edd10">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="352.0" layoutY="86.0" prefHeight="19.0" prefWidth="131.0" text="Not Found" textFill="#f80d0d">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbl_TotalChecked" layoutX="449.0" layoutY="37.0" prefHeight="17.0" prefWidth="80.0" text="0" />
+            <Label fx:id="lbl_TotalCracked" layoutX="418.0" layoutY="62.0" text="0" />
+            <Label fx:id="lbl_TotalFailed" layoutX="424.0" layoutY="87.0" text="0" />
+         </children>
+      </Pane>
+      <ListView fx:id="listView_CrackedPasswords" layoutX="40.0" layoutY="475.0" prefHeight="285.0" prefWidth="260.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="38.0" layoutY="439.0" prefHeight="39.0" prefWidth="260.0" text="Cracked Passwords" textAlignment="CENTER" textFill="#4c9e0d">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
