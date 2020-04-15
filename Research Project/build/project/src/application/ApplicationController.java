@@ -39,7 +39,6 @@ public class ApplicationController {
 			stage.setScene(scene);
 			stage.showAndWait();
 		
-			System.out.println(controller.hello);
 			
 		
 			

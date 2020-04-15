@@ -38,9 +38,7 @@ public class ApplicationController {
 			Stage stage = new Stage();
 			stage.setScene(scene);
 			stage.showAndWait();
-		
-			System.out.println(controller.hello);
-			
+					
 		
 			
 		} catch (IOException e1) {

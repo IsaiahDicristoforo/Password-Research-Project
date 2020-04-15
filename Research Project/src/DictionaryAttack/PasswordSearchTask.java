@@ -44,7 +44,7 @@ public class PasswordSearchTask extends Task<PasswordResult> {
 	@Override
 	protected PasswordResult call() throws Exception {
 		PasswordResult result = new PasswordResult();
-		result.isCracked = false;
+		result.isCracked(false);
 		
 		CountDownLatch lock = new CountDownLatch(10);
 			
@@ -55,9 +55,9 @@ public class PasswordSearchTask extends Task<PasswordResult> {
 			task.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, new EventHandler<WorkerStateEvent>() {
 				@Override
 				public void handle(WorkerStateEvent t) {
-					
+
 					if(task.getValue() != null) {
-						result.isCracked = true;
+						result.isCracked(true);
 						result.setPlainTextPassword(task.getValue());
 						Platform.runLater(new Runnable() {
 

@@ -33,6 +33,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
@@ -119,6 +120,7 @@ public class ApplicationController {
 	@FXML private Button btn_beginTest;
 	@FXML private TextField textField_TotalWordsInDicrionaryList;
 	private int totalWordsInDicrionaryList;
+	@FXML private TextField textField_TotalWordsToCheckAtOnce;
 	
 	
 	
@@ -135,6 +137,8 @@ public class ApplicationController {
 			controller.setDictionaryList(list);
 			controller.setSelectedPasswordList(this.selectedPasswordFile);
 			controller.setTotalWordsInDictionary(Integer.parseInt(this.textField_TotalWordsInDicrionaryList.getText()));
+		
+			controller.setTotalWordsToCheckAtOnce(Integer.parseInt(this.textField_TotalWordsToCheckAtOnce.getText()));
 			controller.beginAttack();
 			
 			Scene scene = new Scene(root);

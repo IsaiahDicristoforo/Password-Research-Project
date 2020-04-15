@@ -88,22 +88,22 @@
                      <children>
                         <Label text="Test Name">
                            <font>
-                              <Font size="22.0" />
+                              <Font size="15.0" />
                            </font>
                         </Label>
                         <Separator orientation="VERTICAL" prefHeight="56.0" prefWidth="34.0" />
                         <TextField fx:id="tf_TestName" />
                         <Separator orientation="VERTICAL" prefHeight="56.0" prefWidth="80.0" />
-                        <Label text="Description">
+                        <Label alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="117.0" text="Description">
                            <font>
-                              <Font size="22.0" />
+                              <Font size="15.0" />
                            </font>
                         </Label>
                         <Separator orientation="VERTICAL" prefHeight="56.0" prefWidth="34.0" />
                         <TextArea fx:id="ta_TestInformation" prefHeight="56.0" prefWidth="153.0" />
                      </children>
                   </HBox>
-                  <Label layoutX="29.0" layoutY="20.0" prefHeight="38.0" prefWidth="162.0" text="Dictionary Attack" textFill="#f17325">
+                  <Label layoutX="14.0" layoutY="20.0" prefHeight="38.0" prefWidth="206.0" text="Dictionary Attack" textFill="#f17325">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -116,12 +116,12 @@
                                  <children>
                                   <AnchorPane layoutX="14.0" layoutY="13.0" minHeight="0.0" minWidth="0.0" prefHeight="280.0" prefWidth="254.0">
                                        <children>
-                                          <Label fx:id="lbl_DictionaryList" layoutX="140.0" layoutY="14.0" prefHeight="30.0" prefWidth="749.0" text="None Selected" textFill="#f00707">
+                                          <Label fx:id="lbl_DictionaryList" layoutX="187.0" layoutY="14.0" prefHeight="30.0" prefWidth="702.0" text="None Selected" textFill="#f00707">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="25.0" layoutY="15.0" prefHeight="17.0" prefWidth="123.0" text="Selected List" textAlignment="CENTER">
+                                          <Label layoutX="22.0" layoutY="15.0" prefHeight="17.0" prefWidth="123.0" text="Selected List" textAlignment="CENTER">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -149,10 +149,10 @@
                                                             </HBox>
                                                             <Pane prefHeight="32.0" prefWidth="322.0">
                                                                <children>
-                                                                  <HBox alignment="CENTER" layoutX="35.0" prefHeight="17.0" prefWidth="282.0">
+                                                                  <HBox alignment="CENTER" layoutX="7.0" prefHeight="17.0" prefWidth="326.0">
                                                                      <children>
                                                                         <Label prefHeight="17.0" prefWidth="106.0" text="Words Analyzed: " />
-                                                                        <Label fx:id="lbl_TotalWordsCounter" prefHeight="17.0" prefWidth="97.0" text="None" />
+                                                                        <Label fx:id="lbl_TotalWordsCounter" prefHeight="17.0" prefWidth="106.0" text="None" />
                                                                      </children>
                                                                   </HBox>
                                                                </children>
@@ -162,7 +162,7 @@
                                                    </children>
                                                 </VBox>
                                                 <Button fx:id="btn_RunDictionaryAnalysis" layoutX="180.0" layoutY="22.0" mnemonicParsing="false" onAction="#AnalyzeSelectedDictionary" text="Run  Dictionary  Analysis Tool" />
-                                                <Button fx:id="btn_ViewDictionaryTestResults" layoutX="372.0" layoutY="21.0" mnemonicParsing="false" onAction="#LoadDictionaryResultsWindow" text="View Results" />
+                                                <Button fx:id="btn_ViewDictionaryTestResults" layoutX="418.0" layoutY="21.0" mnemonicParsing="false" onAction="#LoadDictionaryResultsWindow" text="View Results" />
                                                 <Separator layoutX="76.0" layoutY="51.0" orientation="VERTICAL" prefHeight="73.0" prefWidth="54.0" />
                                              </children>
                                           </Pane>
@@ -225,10 +225,10 @@
                                     <Button fx:id="btn_beginTest" layoutX="28.0" layoutY="120.0" mnemonicParsing="false" onAction="#beginDictionaryAttack" prefHeight="58.0" prefWidth="130.0" text="Begin Test" />
                                     <TextField fx:id="textField_TotalWordsInDicrionaryList" layoutX="578.0" layoutY="145.0" />
                                     <Label layoutX="578.0" layoutY="128.0" text="Total Words 'In Dicrionary" />
-                                    <Spinner editable="true" layoutX="305.0" layoutY="95.0" prefHeight="40.0" prefWidth="114.0" />
                                     <Label layoutX="264.0" layoutY="77.0" prefHeight="17.0" prefWidth="196.0" text="Total Passwords To Crack At A Time" />
                                     <Spinner editable="true" layoutX="312.0" layoutY="182.0" prefHeight="40.0" prefWidth="114.0" />
                                     <Label layoutX="210.0" layoutY="159.0" prefHeight="17.0" prefWidth="318.0" text="Total Threads To Dedicate To Cracking A Single Password" />
+                                    <TextField fx:id="textField_TotalWordsToCheckAtOnce" layoutX="276.0" layoutY="94.0" prefHeight="25.0" prefWidth="171.0" />
                                  </children>
                               </AnchorPane>
                           </content>

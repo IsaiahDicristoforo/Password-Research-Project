@@ -49,6 +49,7 @@ public class SearchPartOfDictionaryTask extends Task<String> {
 				 String line =  streamIterator.next();	
 				 //lineNum++;
 				 startIndex++;
+				
 				 String dictionaryHash = new SHA1HashGenerator().generateHash(line);
 				 if(dictionaryHash.equals(hashedPassword.substring(0,40))) {
 
