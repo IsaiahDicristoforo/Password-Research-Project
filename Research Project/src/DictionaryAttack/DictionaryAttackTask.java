@@ -49,11 +49,12 @@ public class DictionaryAttackTask extends Task<DictionaryAttackResult> {
 	private int totalWordsInDictionary;
 	private int totalWordsToCheckAtOnce;
 	private PieChart chart_WordLengthDistribution;
+	private int totalThreadsForEachPassword;
 
 	public DictionaryAttackTask(File dictionaryList, File passwordList,
 
 			ListView lv_crackedPasswords, Label lblTotalCracked, Label lblTotalFailed, int totalWordsInDictionary,
-			int totalWordstoCheckAtOnce, PieChart wordLengthDistribution) {
+			int totalWordstoCheckAtOnce, PieChart wordLengthDistribution, int threadsForTotalPassword) {
 
 		this.totalWordsToCheckAtOnce = totalWordstoCheckAtOnce;
 		this.dictionaryList = dictionaryList;
@@ -63,6 +64,7 @@ public class DictionaryAttackTask extends Task<DictionaryAttackResult> {
 		this.lbl_TotalFailed = lblTotalFailed;
 		this.totalWordsInDictionary = totalWordsInDictionary;
 		this.chart_WordLengthDistribution = wordLengthDistribution;
+		this.totalThreadsForEachPassword = threadsForTotalPassword;
 	}
 
 	public void configurePieChart(DictionaryAttackResult result) {
@@ -112,7 +114,7 @@ public class DictionaryAttackTask extends Task<DictionaryAttackResult> {
 			for (int i = 1; i <= totalWordsToCheckAtOnce; i++) {
 
 				PasswordSearchTask searchTask = new PasswordSearchTask(latch, new String(line), this.dictionaryList,
-						this.lv_crackedPasswords, this.totalWordsInDictionary);
+						this.lv_crackedPasswords, this.totalWordsInDictionary, this.totalThreadsForEachPassword);
 				searchTask.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
 						new EventHandler<WorkerStateEvent>() {
 							@Override

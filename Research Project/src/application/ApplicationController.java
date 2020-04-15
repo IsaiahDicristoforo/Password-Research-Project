@@ -121,6 +121,7 @@ public class ApplicationController {
 	@FXML private TextField textField_TotalWordsInDicrionaryList;
 	private int totalWordsInDicrionaryList;
 	@FXML private TextField textField_TotalWordsToCheckAtOnce;
+	@FXML private TextField threadsToDedicateToASinglePassword;
 	
 	
 	
@@ -139,6 +140,7 @@ public class ApplicationController {
 			controller.setTotalWordsInDictionary(Integer.parseInt(this.textField_TotalWordsInDicrionaryList.getText()));
 		
 			controller.setTotalWordsToCheckAtOnce(Integer.parseInt(this.textField_TotalWordsToCheckAtOnce.getText()));
+			controller.setThreadsForTotalPassword(Integer.parseInt(this.threadsToDedicateToASinglePassword.getText()));
 			controller.beginAttack();
 			
 			Scene scene = new Scene(root);

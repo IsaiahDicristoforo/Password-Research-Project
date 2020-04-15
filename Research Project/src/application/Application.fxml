@@ -10,7 +10,6 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
@@ -226,9 +225,9 @@
                                     <TextField fx:id="textField_TotalWordsInDicrionaryList" layoutX="578.0" layoutY="145.0" />
                                     <Label layoutX="578.0" layoutY="128.0" text="Total Words 'In Dicrionary" />
                                     <Label layoutX="264.0" layoutY="77.0" prefHeight="17.0" prefWidth="196.0" text="Total Passwords To Crack At A Time" />
-                                    <Spinner editable="true" layoutX="312.0" layoutY="182.0" prefHeight="40.0" prefWidth="114.0" />
                                     <Label layoutX="210.0" layoutY="159.0" prefHeight="17.0" prefWidth="318.0" text="Total Threads To Dedicate To Cracking A Single Password" />
                                     <TextField fx:id="textField_TotalWordsToCheckAtOnce" layoutX="276.0" layoutY="94.0" prefHeight="25.0" prefWidth="171.0" />
+                                    <TextField fx:id="threadsToDedicateToASinglePassword" layoutX="287.0" layoutY="178.0" />
                                  </children>
                               </AnchorPane>
                           </content>

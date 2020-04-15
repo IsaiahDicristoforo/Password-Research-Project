@@ -27,7 +27,7 @@ public class DictionaryAttackController {
 	private File selectedPasswordList;
 	@FXML private PieChart chart_WordLengthDistribution;
 	@FXML private Label lbl_TotalProgress;
-	
+	private int threadsForTotalPassword;
 	
 	
 	
@@ -40,7 +40,7 @@ public class DictionaryAttackController {
 	
 	public void beginAttack() {
 
-		DictionaryAttackTask task = new DictionaryAttackTask(new File(dictionaryList.getFilePath()), selectedPasswordList, listView_CrackedPasswords, this.lbl_TotalCracked, this.lbl_TotalFailed, this.getTotalWordsInDictionary(),this.totalWordsToCheckAtOnce,chart_WordLengthDistribution);
+		DictionaryAttackTask task = new DictionaryAttackTask(new File(dictionaryList.getFilePath()), selectedPasswordList, listView_CrackedPasswords, this.lbl_TotalCracked, this.lbl_TotalFailed, this.getTotalWordsInDictionary(),this.totalWordsToCheckAtOnce,chart_WordLengthDistribution, this.threadsForTotalPassword);
 		Thread t = new Thread(task);
 		pgb_OverallProgress.progressProperty().bind(task.progressProperty());
 		lbl_TotalChecked.textProperty().bind(task.workDoneProperty().asString());
@@ -88,6 +88,14 @@ public class DictionaryAttackController {
 
 	public void setTotalWordsToCheckAtOnce(int totalWordsToCheckAtOnce) {
 		this.totalWordsToCheckAtOnce = totalWordsToCheckAtOnce;
+	}
+
+	public int getThreadsForTotalPassword() {
+		return threadsForTotalPassword;
+	}
+
+	public void setThreadsForTotalPassword(int threadsForTotalPassword) {
+		this.threadsForTotalPassword = threadsForTotalPassword;
 	}
 	
 
