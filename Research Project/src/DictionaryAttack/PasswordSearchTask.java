@@ -46,12 +46,12 @@ public class PasswordSearchTask extends Task<PasswordResult> {
 		PasswordResult result = new PasswordResult();
 		result.isCracked(false);
 		
-		CountDownLatch lock = new CountDownLatch(10);
+		CountDownLatch lock = new CountDownLatch(5);
 			
 		ArrayList<Thread> threads = new ArrayList<Thread>();
 		int increment = 1;
-		for(int i = 1; i <= 10; i++) {
-			SearchPartOfDictionaryTask task = new SearchPartOfDictionaryTask(this.dictionary.getAbsolutePath(),password,increment,increment + (this.totalWordsInDictionary/10),lock);
+		for(int i = 1; i <= 5; i++) {
+			SearchPartOfDictionaryTask task = new SearchPartOfDictionaryTask(this.dictionary.getAbsolutePath(),password,increment,increment + (this.totalWordsInDictionary/5),lock);
 			task.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, new EventHandler<WorkerStateEvent>() {
 				@Override
 				public void handle(WorkerStateEvent t) {
@@ -63,11 +63,10 @@ public class PasswordSearchTask extends Task<PasswordResult> {
 
 							@Override
 							public void run() {
-								if(lv_CrackedPasswords.getItems().size() > 100) {
+								if(lv_CrackedPasswords.getItems().size() > 1000) {
 									lv_CrackedPasswords.getItems().clear();
 								}
 								 lv_CrackedPasswords.getItems().add(result.getPlainTextPassword());
-								
 							}
 							
 						});
@@ -77,7 +76,7 @@ public class PasswordSearchTask extends Task<PasswordResult> {
 				}
 			});
 			threads.add(new Thread(task));
-			increment += (this.totalWordsInDictionary/10);
+			increment += (this.totalWordsInDictionary/5);
 			
 			
 		}

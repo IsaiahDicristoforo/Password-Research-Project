@@ -63,6 +63,6 @@
             <Font size="27.0" />
          </font>
       </Label>
-      <PieChart fx:id="chart_WordLengthDistribution" layoutX="336.0" layoutY="450.0" prefHeight="322.0" prefWidth="470.0" />
+      <PieChart fx:id="chart_WordLengthDistribution" layoutX="336.0" layoutY="440.0" prefHeight="332.0" prefWidth="636.0" />
    </children>
 </AnchorPane>

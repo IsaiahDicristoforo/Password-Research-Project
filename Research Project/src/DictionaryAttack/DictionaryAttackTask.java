@@ -125,7 +125,6 @@ public class DictionaryAttackTask extends Task<DictionaryAttackResult> {
 
 										if (attackResult.getTotalWordsChecked() % 10 == 0) {
 											configurePieChart(attackResult);
-
 										}
 
 										if (searchTask.getValue().isCracked()) {
@@ -165,7 +164,7 @@ public class DictionaryAttackTask extends Task<DictionaryAttackResult> {
 				thread.start();
 			}
 
-			latch.await(600, TimeUnit.SECONDS);
+			latch.await();
 			if (latch.getCount() == 0) {
 				totalTasks.clear();
 			}
