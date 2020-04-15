@@ -228,6 +228,7 @@
                                     <Label layoutX="210.0" layoutY="159.0" prefHeight="17.0" prefWidth="318.0" text="Total Threads To Dedicate To Cracking A Single Password" />
                                     <TextField fx:id="textField_TotalWordsToCheckAtOnce" layoutX="276.0" layoutY="94.0" prefHeight="25.0" prefWidth="171.0" />
                                     <TextField fx:id="threadsToDedicateToASinglePassword" layoutX="287.0" layoutY="178.0" />
+                                    <Button layoutX="28.0" layoutY="67.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="128.0" text="File Ouput Directory" />
                                  </children>
                               </AnchorPane>
                           </content>

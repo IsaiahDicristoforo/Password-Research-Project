@@ -38,7 +38,7 @@ public class DictionaryAnalysisTask extends Task<DictionaryAnalysisResult> {
 		FileReader fileReader = new FileReader(filePath);
 		BufferedReader reader = new BufferedReader(fileReader);
 		
-		String nextLine = reader.readLine();
+		String nextLine = reader.readLine().substring(41);
 	    int totalLines = GetTotalLines();
 	    result.setTotalWords(totalLines);
 	    result.setFileName(new File(filePath).getName());
@@ -50,8 +50,15 @@ public class DictionaryAnalysisTask extends Task<DictionaryAnalysisResult> {
 			
 			result.UpdateResults(nextLine);
 			
+		
+			String line = reader.readLine();
 			
-			nextLine = reader.readLine();
+			if(line == null) {
+				break;
+			}else {
+				nextLine = line.substring(41);
+			}			
+
 			currentLine++;
 			
 		   updateProgress(currentLine, totalLines);

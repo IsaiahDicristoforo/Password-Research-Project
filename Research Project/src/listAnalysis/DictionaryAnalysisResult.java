@@ -30,7 +30,7 @@ public class DictionaryAnalysisResult {
 	
 	public void UpdateResults(String wordToAdd) {
 		AddWordToLengthTracker(wordToAdd);
-		if(Character.isAlphabetic(wordToAdd.charAt(0))) {
+		if(Character.isLetter(wordToAdd.charAt(0))) {
 			totalWordsThatStartWithLetter++;
 		} else{
 			totalWordsStartingWithNonLetter++;

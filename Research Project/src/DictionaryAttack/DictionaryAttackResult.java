@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
+import com.nulabinc.zxcvbn.Zxcvbn;
+
 public class DictionaryAttackResult {
 	
 	private int totalWordsChecked;

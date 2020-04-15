@@ -50,14 +50,14 @@ public class SearchPartOfDictionaryTask extends Task<String> {
 				 //lineNum++;
 				 startIndex++;
 				
-				 String dictionaryHash = new SHA1HashGenerator().generateHash(line);
-				 if(dictionaryHash.equals(hashedPassword.substring(0,40))) {
+				// String dictionaryHash = new SHA1HashGenerator().generateHash(line);
+				 if(line.substring(0,40).equals(hashedPassword.substring(0,40))) {
 
 					 while(lock.getCount() > 0) {
 						 lock.countDown();
 					 }
 					 //System.out.println(line + " FOUND");
-					 return line;
+					 return line.substring(41);
 					 
 					 
 				 }
