@@ -5,7 +5,10 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane minWidth="1269.0" prefHeight="804.0" prefWidth="1515.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DictionaryAttackController">
@@ -51,18 +54,208 @@
                <font>
                   <Font size="22.0" />
                </font></Label>
-            <Label fx:id="lbl_TotalFailed" layoutX="517.0" layoutY="101.0" prefHeight="32.0" prefWidth="267.0" text="0">
+            <Label fx:id="lbl_TotalFailed" layoutX="517.0" layoutY="99.0" prefHeight="32.0" prefWidth="267.0" text="0">
                <font>
                   <Font size="22.0" />
                </font></Label>
          </children>
       </Pane>
-      <ListView fx:id="listView_CrackedPasswords" layoutX="40.0" layoutY="173.0" prefHeight="587.0" prefWidth="260.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="129.0" prefHeight="39.0" prefWidth="260.0" text="Cracked Passwords" textAlignment="CENTER" textFill="#4c9e0d">
+      <ListView fx:id="listView_CrackedPasswords" layoutX="40.0" layoutY="222.0" prefHeight="538.0" prefWidth="260.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="174.0" prefHeight="39.0" prefWidth="260.0" text="Cracked Passwords" textAlignment="CENTER" textFill="#4c9e0d">
          <font>
             <Font size="27.0" />
          </font>
       </Label>
-      <PieChart fx:id="chart_WordLengthDistribution" layoutX="336.0" layoutY="440.0" prefHeight="332.0" prefWidth="636.0" />
+      <PieChart fx:id="chart_WordLengthDistribution" layoutX="336.0" layoutY="440.0" prefHeight="332.0" prefWidth="533.0" />
+      <Label layoutX="921.0" layoutY="449.0" prefHeight="36.0" prefWidth="224.0" text="Password Strength">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <Pane layoutX="921.0" layoutY="497.0" prefHeight="218.0" prefWidth="589.0">
+         <children>
+            <GridPane prefHeight="205.0" prefWidth="542.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="20.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label prefHeight="38.0" prefWidth="341.0" text="Password Strength 0" textFill="#fe1212">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="38.0" prefWidth="327.0" text="Password Strength 1" textFill="#e1b31d" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="38.0" prefWidth="339.0" text="Password Strength 2" textFill="#f08b2d" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="38.0" prefWidth="344.0" text="Password Strength 3" textFill="#6daf55" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="s0" prefHeight="28.0" prefWidth="165.0" text="0" textFill="#fe1212" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="s1" prefHeight="28.0" prefWidth="195.0" text="0" textFill="#e1b31d" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="s2" prefHeight="28.0" prefWidth="195.0" text="0" textFill="#f08b2d" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="s3" prefHeight="28.0" prefWidth="195.0" text="0" textFill="#6daf55" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="38.0" prefWidth="340.0" text="Password Strength 4" textFill="#246d09" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="s4" prefHeight="28.0" prefWidth="195.0" text="0" textFill="#246d09" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+         </children>
+      </Pane>
+      <Label layoutX="758.0" layoutY="229.0" prefHeight="34.0" prefWidth="165.0" text="Elasped Time">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="elaspedTime" layoutX="758.0" layoutY="263.0" prefHeight="30.0" prefWidth="237.0" text="0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Pane layoutX="34.0" layoutY="15.0" prefHeight="154.0" prefWidth="258.0">
+         <children>
+            <Label alignment="CENTER" layoutX="42.0" layoutY="2.0" prefHeight="17.0" prefWidth="169.0" text="Password Info">
+               <font>
+                  <Font name="Arial Black" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="19.0" layoutY="38.0" prefHeight="27.0" prefWidth="80.0" text="Strength:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="strength" layoutX="119.0" layoutY="39.0" prefHeight="27.0" prefWidth="80.0" text="_" textFill="#13d613">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="1129.0" layoutY="9.0" prefHeight="394.0" prefWidth="377.0">
+         <children>
+            <Label alignment="CENTER" layoutX="14.0" layoutY="44.0" prefHeight="32.0" prefWidth="200.0" text="PasswordStats">
+               <font>
+                  <Font name="Arial Black" size="22.0" />
+               </font>
+            </Label>
+            <GridPane layoutX="25.0" layoutY="88.0" prefHeight="279.0" prefWidth="333.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Beginning W/ Uppercase" textFill="#149626" />
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Beginning With Lowercase" textFill="#149626" GridPane.rowIndex="1" />
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Beginning With Number" textFill="#149626" GridPane.rowIndex="2" />
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Average Letters Per Word" textFill="#149626" GridPane.rowIndex="7" />
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Average Numbers Per Word" textFill="#149626" GridPane.rowIndex="8" />
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="String # Combination" textFill="#149626" GridPane.rowIndex="6" />
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Ending With Number" textFill="#149626" GridPane.rowIndex="5" />
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Ending With Letter" textFill="#149626" GridPane.rowIndex="4" />
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Beginning With Letter" textFill="#149626" GridPane.rowIndex="3" />
+                  <Label fx:id="lblTotalBeginningWithUppercase" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblAverageNumbersPerWord" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblAverageLettersPerWord" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblTotalWithStringNumberCombination" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblTotalEndingWithNumber" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblTotalEndingWithLetter" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblTotalBeginningWithLetter" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblTotalBeginningWithNumber" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblTotalBeginningWithLowercase" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+         </children>
+      </Pane>
+      <Label layoutX="1211.0" layoutY="448.0" prefHeight="36.0" prefWidth="224.0" text="Cracked">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

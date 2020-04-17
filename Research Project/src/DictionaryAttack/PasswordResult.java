@@ -1,5 +1,13 @@
 package DictionaryAttack;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import com.nulabinc.zxcvbn.Feedback;
+import com.nulabinc.zxcvbn.Zxcvbn;
+
 public class PasswordResult {
 	
 	private String plainTextPassword;
@@ -20,9 +28,13 @@ public class PasswordResult {
 	private int totalLowercaseLetters = 0;
 	private boolean beginsWithUppercaseLetter = false;
 	private boolean beginsWithLowercaseLetter;
+	private int passwordStrength;
+	public String passwordFeedback;
 	
 	
 	
+
+
 	public PasswordResult(){
 
 		plainTextPassword = null;
@@ -56,6 +68,19 @@ public class PasswordResult {
 			this.setTotalLowercaseLetters();
 			this.setTotalNumbers();
 			this.setTotalUppercaseLetters();
+			
+			Zxcvbn strengthCalculator = new Zxcvbn();
+			int strength = strengthCalculator.measure(result).getScore();
+			this.setPasswordStrength(strength);
+			
+			Feedback feedback = strengthCalculator.measure(result).getFeedback();
+			List<String> passwordFeedback = feedback.getSuggestions();
+	
+			this.passwordFeedback = "";
+			for(String s : passwordFeedback) {
+				this.passwordFeedback += s + " ";
+			}
+			
 		}
 		
 	}
@@ -253,6 +278,26 @@ public class PasswordResult {
 	private void setBeginsWithLowercaseLetter() {
 		this.beginsWithLowercaseLetter = Character.isLowerCase(plainTextPassword.charAt(0));
 	}
+
+
+	public int getPasswordStrength() {
+		return passwordStrength;
+	}
+
+
+	public void setPasswordStrength(int passwordStrength) {
+		this.passwordStrength = passwordStrength;
+	}
+	
+	public String getPasswordFeedback() {
+		return passwordFeedback;
+	}
+
+
+	public void setPasswordFeedback(String passwordFeedback) {
+		this.passwordFeedback = passwordFeedback;
+	}
+
 	
 
 }

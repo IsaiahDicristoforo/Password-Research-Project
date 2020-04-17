@@ -122,8 +122,13 @@ public class ApplicationController {
 	private int totalWordsInDicrionaryList;
 	@FXML private TextField textField_TotalWordsToCheckAtOnce;
 	@FXML private TextField threadsToDedicateToASinglePassword;
+	File crackedPasswordOutput;
+	@FXML Button selectOutputFile;
 	
-	
+	public void chooseOutputFile() {
+		FileChooser chooser = new FileChooser();
+		crackedPasswordOutput = chooser.showOpenDialog(this.accordian_mainWindows.getScene().getWindow());
+	}
 	
 	public void beginDictionaryAttack() {
 		
@@ -141,6 +146,7 @@ public class ApplicationController {
 		
 			controller.setTotalWordsToCheckAtOnce(Integer.parseInt(this.textField_TotalWordsToCheckAtOnce.getText()));
 			controller.setThreadsForTotalPassword(Integer.parseInt(this.threadsToDedicateToASinglePassword.getText()));
+			controller.setSelectedOutputFile(this.crackedPasswordOutput);
 			controller.beginAttack();
 			
 			Scene scene = new Scene(root);

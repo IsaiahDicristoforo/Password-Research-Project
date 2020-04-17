@@ -13,7 +13,14 @@ public class DictionaryAttackResult {
 	private ArrayList<PasswordResult> crackedPasswords;
 	private ReentrantLock totalWordsCheckedLock;
 	private int totalWordsWithStringNumberCombination;
+	private int totalBeginningWithLowercaseLetter;
+	private int totalBeginningWithUppercaseLetter;
 	private HashMap<Integer, Integer> wordLengthDistribution;
+	private int totalCracked = 0;
+	private int strength1;
+	private int strength2;
+	private int strength3;
+	private int strength4;
 	
 	public DictionaryAttackResult(){
 		totalWordsCheckedLock = new ReentrantLock();
@@ -25,25 +32,51 @@ public class DictionaryAttackResult {
 	
 	
 	
-	public void AddPasswordResult(PasswordResult passwordResult) {
+	public synchronized void AddPasswordResult(PasswordResult passwordResult) {
 		
-		totalWordsCheckedLock.lock();
+		//totalWordsCheckedLock.lock();
 		try {
+			
 			
 			totalWordsChecked = totalWordsChecked + 1;
 			
+			
 			if(passwordResult.isCracked()) {
+				totalCracked++;
+				
+				if(passwordResult.getPasswordStrength() == 1) {
+					this.strength1++;
+				}
+				if(passwordResult.getPasswordStrength() == 2) {
+					this.strength2++;
+				}
+				if(passwordResult.getPasswordStrength() == 3) {
+					this.strength3++;
+				
+				}
+				if(passwordResult.getPasswordStrength() == 4) {
+					this.strength4++;
+				}
+
+				
 				addWordToLengthTracker(passwordResult.getPlainTextPassword());
 				if(passwordResult.isStringNumberCombination()) {
 					this.totalWordsWithStringNumberCombination++;
 				}
+				if(passwordResult.BeginsWithLowercaseLetter()) {
+					this.totalBeginningWithLowercaseLetter++;
+				}
+				if(passwordResult.BeginsWithUppercaseLetter()) {
+					this.totalBeginningWithUppercaseLetter++;
+				}
+				
 			}
 			
 
 			//System.out.println(passwordResult.getPlainTextPassword() + " starts with lowercase letter " + passwordResult.BeginsWithLowercaseLetter());
 		
 		}finally {
-			totalWordsCheckedLock.unlock();
+			//totalWordsCheckedLock.unlock();
 
 		}
 		
@@ -93,6 +126,37 @@ public class DictionaryAttackResult {
 
 	public void setWordLengthDistribution(HashMap<Integer, Integer> wordLengthDistribution) {
 		this.wordLengthDistribution = wordLengthDistribution;
+	}
+
+
+
+
+	public int getTotalCracked() {
+		return totalCracked;
+	}
+
+
+
+
+	public void setTotalCracked(int totalCracked) {
+		this.totalCracked = totalCracked;
+	}
+
+	public int getTotalBeginningWithUppercaseLetter() {
+		return this.totalBeginningWithUppercaseLetter;
+	}
+
+
+
+	public int getTotalBeginningWithLowercaseLetter() {
+		return totalBeginningWithLowercaseLetter;
+	}
+
+
+
+
+	public void setTotalBeginningWithLowercaseLetter(int totalBeginningWithLowercaseLetter) {
+		this.totalBeginningWithLowercaseLetter = totalBeginningWithLowercaseLetter;
 	}
 
 }

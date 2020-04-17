@@ -12,10 +12,13 @@ import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import java.util.stream.Stream;
 
+import com.nulabinc.zxcvbn.Zxcvbn;
+
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 public class PasswordSearchTask extends Task<PasswordResult> {
@@ -27,10 +30,29 @@ public class PasswordSearchTask extends Task<PasswordResult> {
 	private ListView lv_CrackedPasswords;
 	private int totalWordsInDictionary;
 	private int threadsForEachPassword;
+	private Label lbl_TotalCracked;
+	private Label lbl_TotalNotCracked;
+	private Label lbl_s0;
+	private Label lbl_s1;
+	private Label lbl_s2;
+	private Label lbl_s3;
+	private Label lbl_s4;
+	private Label[] passwordStatLabels;
+
 	
-	public PasswordSearchTask(CountDownLatch countDownLatch,String hashedPassword, File dictionary, ListView lv_CrackedPasswords, int totalWordsInDictionary, int totalThreadsForEachPassword) {
+	public PasswordSearchTask(CountDownLatch countDownLatch,String hashedPassword, File dictionary,
+			ListView lv_CrackedPasswords, int totalWordsInDictionary, 
+			int totalThreadsForEachPassword, Label totalCracked, Label totalFailed,Label s0, Label s1, Label s2, Label s3, Label s4, Label[] passwordStatLabels) {
 		password = new String(hashedPassword);
+		this.passwordStatLabels = passwordStatLabels;
+		this.lbl_s0 = s0;
+		this.lbl_s1 = s1;
+		this.lbl_s2 = s2;
+		this.lbl_s3 = s3;
+		this.lbl_s4 = s4;
 		this.dictionary = dictionary;
+		this.lbl_TotalCracked = totalCracked;
+		this.lbl_TotalNotCracked = totalFailed;
 		this.totalWordsInDictionary = totalWordsInDictionary;
 		this.lv_CrackedPasswords = lv_CrackedPasswords;
 		this.countDownLatch = countDownLatch;
@@ -69,6 +91,71 @@ public class PasswordSearchTask extends Task<PasswordResult> {
 									lv_CrackedPasswords.getItems().clear();
 								}
 								 lv_CrackedPasswords.getItems().add(result.getPlainTextPassword());
+								 lbl_TotalCracked.setText(Integer.toString(Integer.parseInt(lbl_TotalCracked.getText())+1));
+								
+								 if(result.getPasswordStrength() == 0) {
+									 lbl_s0.setText(Integer.toString(Integer.parseInt(lbl_s0.getText()) + 1));
+									 
+								 }
+								 else if(result.getPasswordStrength() == 1) {
+									 lbl_s1.setText(Integer.toString(Integer.parseInt(lbl_s1.getText()) + 1));
+								 }
+								 else if(result.getPasswordStrength() == 2) {
+									 lbl_s2.setText(Integer.toString(Integer.parseInt(lbl_s2.getText()) + 1));
+								 } else if(result.getPasswordStrength() == 3) {
+									 lbl_s3.setText(Integer.toString(Integer.parseInt(lbl_s3.getText()) + 1));
+								 }
+								 else if(result.getPasswordStrength() == 4) {
+									 lbl_s4.setText(Integer.toString(Integer.parseInt(lbl_s4.getText()) + 1));
+								 }
+								 
+								 /*
+								  * 
+								  * 
+								  * passwordStatLabels[0] = lblTotalBeginningWithUppercase;
+		passwordStatLabels[1] = lblTotalBeginningWithLowercase;
+		passwordStatLabels[2] = lblTotalBeginningWithNumber;
+		
+		passwordStatLabels[3] = lblTotalBeginningWithLetter;
+		
+		passwordStatLabels[4] = lblTotalEndingWithLetter;
+		passwordStatLabels[5] = lblTotalEndingWithNumber;
+		
+		passwordStatLabels[6] = lblTotalWithStringNumberCombination;
+		passwordStatLabels[7] = lblAverageLettersPerWord;
+		passwordStatLabels[8] = lblAverageNumbersPerWord;
+								  */
+								 
+								 if(result.BeginsWithUppercaseLetter()) {
+									 passwordStatLabels[0].setText(Integer.toString(Integer.parseInt(passwordStatLabels[0].getText()) + 1));
+								 }
+								 if(result.BeginsWithLowercaseLetter()) {
+									 passwordStatLabels[1].setText(Integer.toString(Integer.parseInt(passwordStatLabels[1].getText()) + 1));
+
+								 }
+								 if(result.BeginsWithNumber()) {
+									 passwordStatLabels[2].setText(Integer.toString(Integer.parseInt(passwordStatLabels[2].getText()) + 1));
+
+								 }
+								 if(result.isStartsWithLetter()) {
+									 passwordStatLabels[3].setText(Integer.toString(Integer.parseInt(passwordStatLabels[3].getText()) + 1));
+
+								 }
+								 if(result.EndsWithLetter()) {
+									 passwordStatLabels[4].setText(Integer.toString(Integer.parseInt(passwordStatLabels[4].getText()) + 1));
+
+								 }
+								 if(result.endsWithNumber()) {
+									 passwordStatLabels[5].setText(Integer.toString(Integer.parseInt(passwordStatLabels[5].getText()) + 1));
+
+								 }
+								 if(result.isStringNumberCombination()) {
+									 passwordStatLabels[6].setText(Integer.toString(Integer.parseInt(passwordStatLabels[6].getText()) + 1));
+
+								 }
+								 
+								 
+								 
 							}
 							
 						});
