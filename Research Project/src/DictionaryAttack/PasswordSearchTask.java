@@ -154,8 +154,7 @@ public class PasswordSearchTask extends Task<PasswordResult> {
 
 								 }
 								 
-								 
-								 
+			
 							}
 							
 						});

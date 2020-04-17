@@ -126,11 +126,7 @@
                                                 <Font size="18.0" />
                                              </font>
                                           </Label>
-                                        <Button fx:id="btn_NewDictionaryList" layoutX="25.0" layoutY="123.0" mnemonicParsing="false" onAction="#LoadNewDictionaryWindow" prefHeight="46.0" prefWidth="190.0" text="Select Dictionary List">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Button>
+                                        <Button fx:id="btn_NewDictionaryList" layoutX="25.0" layoutY="123.0" mnemonicParsing="false" onAction="#LoadNewDictionaryWindow" prefHeight="46.0" prefWidth="190.0" text="Select Dictionary List" />
                                           <Pane fx:id="pane_DictionaryAnalysisProgress" layoutX="210.0" layoutY="64.0" prefHeight="198.0" prefWidth="577.0">
                                              <children>
                                                 <VBox layoutX="115.0" layoutY="68.0" prefHeight="92.0" prefWidth="400.0">
@@ -211,9 +207,9 @@
                                       </panes>
                                     </Accordion>
                                     <Label layoutX="14.0" layoutY="14.0" text="Choose  A Password List For Our Program To Try To Crack" />
-                                    <Button fx:id="btn_AddUnhashedPasswordList" layoutX="368.0" layoutY="10.0" mnemonicParsing="false" onAction="#SelectUnhashedFile" prefHeight="25.0" prefWidth="80.0" text="Unhashed" />
-                                    <Button fx:id="btn_AddHashedPasswordList" layoutX="469.0" layoutY="10.0" mnemonicParsing="false" onAction="#SelectHashedFile" prefHeight="25.0" prefWidth="80.0" text="Hashed" />
-                                    <Label layoutX="14.0" layoutY="60.0" prefHeight="17.0" prefWidth="134.0" text="Selected Password List:" />
+                                    <Button fx:id="btn_AddUnhashedPasswordList" layoutX="432.0" layoutY="10.0" mnemonicParsing="false" onAction="#SelectUnhashedFile" prefHeight="25.0" prefWidth="107.0" text="Unhashed" />
+                                    <Button fx:id="btn_AddHashedPasswordList" layoutX="560.0" layoutY="10.0" mnemonicParsing="false" onAction="#SelectHashedFile" prefHeight="25.0" prefWidth="80.0" text="Hashed" />
+                                    <Label layoutX="14.0" layoutY="60.0" prefHeight="17.0" prefWidth="171.0" text="Selected Password List:" />
                                     <Label fx:id="lbl_selectedPasswordList" layoutX="154.0" layoutY="60.0" prefHeight="17.0" prefWidth="707.0" />
                                  </children></AnchorPane>
                         </content>

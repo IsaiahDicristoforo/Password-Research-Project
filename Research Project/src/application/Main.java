@@ -5,6 +5,13 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.nulabinc.zxcvbn.Zxcvbn;
 
@@ -20,6 +27,8 @@ import javafx.scene.layout.BorderPane;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
+		
+		
 		
 		try {
 			
@@ -48,6 +57,7 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
+		
 		launch(args);
 	}
 }

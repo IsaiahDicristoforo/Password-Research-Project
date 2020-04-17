@@ -57,6 +57,7 @@ public class DictionaryAttackController {
 	@FXML
 	private Label elaspedTime;
 	@FXML private Label strength;
+
 	
 	@FXML private File selectedOutputFile;
 	
@@ -69,6 +70,10 @@ public class DictionaryAttackController {
 	@FXML private Label lblTotalWithStringNumberCombination;
 	@FXML private Label lblAverageLettersPerWord;
 	@FXML private Label lblAverageNumbersPerWord;
+	
+	@FXML private CheckBox chxbx_AddPasswordFeedback;
+	
+	private boolean addFeedbackToPasswordList;
 
 	
 	public File getSelectedOutputFile() {
@@ -127,7 +132,6 @@ public class DictionaryAttackController {
 					} catch (InterruptedException interrupted) {
 						
 						if (isCancelled()) {
-							updateMessage("Cancelled");
 							break;
 						}
 					}
@@ -152,12 +156,13 @@ public class DictionaryAttackController {
 		elaspedTime.textProperty().bind(timeTask.messageProperty());
 		
 		Thread timeThread = new Thread(timeTask);
-		timeTask.cancel();
+		timeThread.start();
 		t.start();
 
 		task.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, new EventHandler<WorkerStateEvent>() {
 			@Override
 			public void handle(WorkerStateEvent t) {
+				timeTask.cancel();
 				System.out.println("TASK Succeeded: " + task.getValue().getTotalWordsChecked());
 				System.out.println(task.getValue().getTotalBeginningWithLowercaseLetter()
 						+ " words begin with a lowercase letter");

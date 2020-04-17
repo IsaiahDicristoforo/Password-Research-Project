@@ -58,8 +58,6 @@ public class SearchPartOfDictionaryTask extends Task<String> {
 					 }
 					 //System.out.println(line + " FOUND");
 					 return line.substring(41);
-					 
-					 
 				 }
 				  
 			  }
