@@ -11,7 +11,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Dictionary;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,6 +33,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.StopWatch;
 
 import com.nulabinc.zxcvbn.Zxcvbn;
+import com.nulabinc.zxcvbn.matchers.Match;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -68,13 +71,20 @@ public class DictionaryAttackTask extends Task<DictionaryAttackResult> {
 	private Label s4;
 	private File selectedOutputFile;
 	private Label[] passwordStatLabels;
+	private boolean addPasswordFeedback;
+	private String attackName;
+	private String attackDescription;
 
-	public DictionaryAttackTask(File dictionaryList, File passwordList,
+	public DictionaryAttackTask(String attackName, String attackDescription, boolean addPasswordFeedback, File dictionaryList, File passwordList,
 
 			ListView lv_crackedPasswords, Label lblTotalCracked, Label lblTotalFailed, int totalWordsInDictionary,
 			int totalWordstoCheckAtOnce, PieChart wordLengthDistribution, int threadsForTotalPassword, Label strength0,
-			Label strength1, Label strength2, Label strength3, Label strength4, File selectedOutputFile, Label[] passwordStatLabels) {
+			Label strength1, Label strength2, Label strength3, Label strength4, File selectedOutputFile,
+			Label[] passwordStatLabels) {
 
+		this.attackDescription = attackDescription;
+		this.attackName = attackName;
+		this.addPasswordFeedback = addPasswordFeedback;
 		this.passwordStatLabels = passwordStatLabels;
 		this.totalWordsToCheckAtOnce = totalWordstoCheckAtOnce;
 		this.dictionaryList = dictionaryList;
@@ -130,9 +140,13 @@ public class DictionaryAttackTask extends Task<DictionaryAttackResult> {
 		int passwordListSize = getPasswordListSize();
 
 		BufferedWriter crackedPasswordWriter = new BufferedWriter(new FileWriter(this.selectedOutputFile));
-		crackedPasswordWriter.write("<<<<<<<<<<Cracked Passwords>>>>>>>>>");
+		crackedPasswordWriter.write("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Cracked Passwords>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 		crackedPasswordWriter.newLine();
-		
+		crackedPasswordWriter.write("Attack Name: " + this.attackName);
+		crackedPasswordWriter.newLine();
+		crackedPasswordWriter.write("Attack Description: " + this.attackDescription);
+		crackedPasswordWriter.newLine();
+
 		BufferedReader reader = new BufferedReader(new FileReader(passwordList.getAbsolutePath()));
 
 		String line = reader.readLine();
@@ -160,9 +174,14 @@ public class DictionaryAttackTask extends Task<DictionaryAttackResult> {
 									@Override
 									public void run() {
 
-										if (attackResult.getTotalWordsChecked() % 10 == 0) {
+										if(passwordListSize > 1000) {
+											if (attackResult.getTotalWordsChecked() % 10 == 0) {
+												configurePieChart(attackResult);
+											}
+										}else {
 											configurePieChart(attackResult);
 										}
+										
 
 										if (!searchTask.getValue().isCracked()) {
 											lbl_TotalFailed.setText(
@@ -210,24 +229,47 @@ public class DictionaryAttackTask extends Task<DictionaryAttackResult> {
 			}
 
 			latch.await();
+			
+			if(passwordListSize < 1000) {
+				Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						
+						configurePieChart(attackResult);
+						
+					}
+					
+				});
+				
+			}
+				
+
 			for (PasswordResult passwordResult : passwordResults) {
 				attackResult.AddPasswordResult(passwordResult);
 				try {
-					if(passwordResult.isCracked()) {
-						crackedPasswordWriter.write(StringUtils.rightPad(passwordResult.getPlainTextPassword(), 25) +" Password feedback: " + passwordResult.getPasswordFeedback());
+					if (addPasswordFeedback && passwordResult.isCracked()) {
+
+						crackedPasswordWriter.write(StringUtils.rightPad(passwordResult.getPlainTextPassword(), 20)
+								+ StringUtils.rightPad("Strength:" + passwordResult.getPasswordStrength(), 15)
+								+ StringUtils.rightPad("Patterns:" + passwordResult.getPatternIdentified(), 50)
+								+ StringUtils.rightPad("Lists:" + passwordResult.getDictionaryListFound(), 50)
+								+ " Password feedback: " + passwordResult.getPasswordFeedback());
+						crackedPasswordWriter.newLine();
+
+					} else if (!addPasswordFeedback && passwordResult.isCracked()) {
+						crackedPasswordWriter.write(passwordResult.getPlainTextPassword());
 						crackedPasswordWriter.newLine();
 					}
-				
-				}catch(Exception e) {
-					System.out.println("ERROR " + e.getLocalizedMessage() );
+
+				} catch (Exception e) {
+					System.out.println("ERROR " + e.getLocalizedMessage());
 				}
 			}
 
 			passwordResults.clear();
 
-			if (latch.getCount() == 0) {
-				totalTasks.clear();
-			}
+			totalTasks.clear();
 
 			// line = reader.readLine();
 

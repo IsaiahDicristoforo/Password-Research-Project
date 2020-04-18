@@ -6,7 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.nulabinc.zxcvbn.Feedback;
+import com.nulabinc.zxcvbn.Strength;
 import com.nulabinc.zxcvbn.Zxcvbn;
+import com.nulabinc.zxcvbn.matchers.Match;
 
 public class PasswordResult {
 	
@@ -30,15 +32,56 @@ public class PasswordResult {
 	private boolean beginsWithLowercaseLetter;
 	private int passwordStrength;
 	public String passwordFeedback;
+	private boolean containsAllTheSameCharacters;
+	private boolean contains3OrMoreRepeatingCharacters;
+	private boolean contains5OrMoreRepeatingCharacters;
+	private boolean contains7OrMoreRepeatingCharacters;
+	private String dictionaryListFound = "";
+	private String patternIdentified = "";
 	
-	
-	
-
 
 	public PasswordResult(){
 
 		plainTextPassword = null;
 		isCracked = false;
+		
+	}
+	
+	public  void containsSame(String stringToCheck) {
+		boolean sameChars = true;
+		for(int i = 0; i < stringToCheck.length() - 1; i++) {
+			if(stringToCheck.toLowerCase().charAt(i) != stringToCheck.toLowerCase().charAt(i+1)) {
+				sameChars = false;
+				break;
+			}
+		}
+		
+		 this.containsAllTheSameCharacters = sameChars;
+		
+	}
+	
+	public boolean containsRepeatingCharacters(String stringToCheck, int totalRepeatingDigits) {
+		int maxRepeats = 0;
+		int repeatCounter = 0;
+		
+	
+		for(int i = 0; i < stringToCheck.length() - 1; i++) {
+			for(int j = i; j < stringToCheck.length(); j++) {
+				if(stringToCheck.charAt(i) == stringToCheck.charAt(j)) {
+					repeatCounter++;
+					if(repeatCounter > maxRepeats) {
+						maxRepeats = repeatCounter;
+					}
+				}else {
+					repeatCounter = 0;
+					break;
+				}
+			}
+			
+			repeatCounter = 0;
+		}
+		
+		return maxRepeats  >= totalRepeatingDigits;
 		
 	}
 	
@@ -69,11 +112,37 @@ public class PasswordResult {
 			this.setTotalNumbers();
 			this.setTotalUppercaseLetters();
 			
+			
+			containsSame(result);
+			
+			setContains3OrMoreRepeatingCharacters(containsRepeatingCharacters(result, 3));
+			setContains5OrMoreRepeatingCharacters(containsRepeatingCharacters(result, 5));
+			setContains7OrMoreRepeatingCharacters(containsRepeatingCharacters(result, 7));
+
+
+			
 			Zxcvbn strengthCalculator = new Zxcvbn();
-			int strength = strengthCalculator.measure(result).getScore();
+			Strength passwordStrength = strengthCalculator.measure(result);
+			int strength = passwordStrength.getScore();
 			this.setPasswordStrength(strength);
 			
-			Feedback feedback = strengthCalculator.measure(result).getFeedback();
+			ArrayList<String> patternNames = new ArrayList<String>();
+			ArrayList<String> dictionaryNames = new ArrayList<String>();
+			for(Match m : passwordStrength.getSequence()) {
+			
+				if(m.pattern.name() != null && !patternNames.contains(m.pattern.name())) {
+					this.setPatternIdentified(this.getPatternIdentified() + " " + m.pattern.name());
+				}
+				
+				if(m.dictionaryName != null && !dictionaryNames.contains(m.dictionaryName)) {
+					this.setDictionaryListFound(this.getDictionaryListFound() + " " + m.dictionaryName);
+				}
+				
+				patternNames.add(m.pattern.name());
+				dictionaryNames.add(m.dictionaryName);
+        	}
+			
+			Feedback feedback = passwordStrength.getFeedback();
 			List<String> passwordFeedback = feedback.getSuggestions();
 	
 			this.passwordFeedback = "";
@@ -296,6 +365,54 @@ public class PasswordResult {
 
 	public void setPasswordFeedback(String passwordFeedback) {
 		this.passwordFeedback = passwordFeedback;
+	}
+
+	public boolean isContainsAllTheSameCharacters() {
+		return containsAllTheSameCharacters;
+	}
+
+	public void setContainsAllTheSameCharacters(boolean containsAllTheSameCharacters) {
+		this.containsAllTheSameCharacters = containsAllTheSameCharacters;
+	}
+
+	public boolean isContains3OrMoreRepeatingCharacters() {
+		return contains3OrMoreRepeatingCharacters;
+	}
+
+	public void setContains3OrMoreRepeatingCharacters(boolean contains3OrMoreRepeatingCharacters) {
+		this.contains3OrMoreRepeatingCharacters = contains3OrMoreRepeatingCharacters;
+	}
+
+	public boolean isContains5OrMoreRepeatingCharacters() {
+		return contains5OrMoreRepeatingCharacters;
+	}
+
+	public void setContains5OrMoreRepeatingCharacters(boolean contains5OrMoreRepeatingCharacters) {
+		this.contains5OrMoreRepeatingCharacters = contains5OrMoreRepeatingCharacters;
+	}
+
+	public boolean isContains7OrMoreRepeatingCharacters() {
+		return contains7OrMoreRepeatingCharacters;
+	}
+
+	public void setContains7OrMoreRepeatingCharacters(boolean contains7OrMoreRepeatingCharacters) {
+		this.contains7OrMoreRepeatingCharacters = contains7OrMoreRepeatingCharacters;
+	}
+
+	public String getDictionaryListFound() {
+		return dictionaryListFound;
+	}
+
+	public void setDictionaryListFound(String dictionaryListFound) {
+		this.dictionaryListFound = dictionaryListFound;
+	}
+
+	public String getPatternIdentified() {
+		return patternIdentified;
+	}
+
+	public void setPatternIdentified(String patternIdentified) {
+		this.patternIdentified = patternIdentified;
 	}
 
 	

@@ -9,11 +9,15 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.time.StopWatch;
 
+import com.nulabinc.zxcvbn.Strength;
 import com.nulabinc.zxcvbn.Zxcvbn;
+import com.nulabinc.zxcvbn.matchers.Match;
 
 import DictionaryAttack.DictionaryAttackTask;
 import DictionaryListPaths.DictionaryList;
@@ -57,7 +61,9 @@ public class DictionaryAttackController {
 	@FXML
 	private Label elaspedTime;
 	@FXML private Label strength;
-
+	
+	public String attackName= "";
+	public String attackDescription = "";
 	
 	@FXML private File selectedOutputFile;
 	
@@ -70,8 +76,14 @@ public class DictionaryAttackController {
 	@FXML private Label lblTotalWithStringNumberCombination;
 	@FXML private Label lblAverageLettersPerWord;
 	@FXML private Label lblAverageNumbersPerWord;
+	@FXML private Label lblContainsAllSameCharacters;
+	@FXML private Label lbl3OrMoreRepeating;
+	@FXML private Label lbl5OrMoreRepeating;
+	@FXML private Label lbl7OrMoreRepeating;
 	
-	@FXML private CheckBox chxbx_AddPasswordFeedback;
+	@FXML private Label lblEstimatedCrackTime;
+	@FXML Label lbl_DictionaryLists;
+	@FXML Label lbl_PatternsIdentified;
 	
 	private boolean addFeedbackToPasswordList;
 
@@ -91,9 +103,37 @@ public class DictionaryAttackController {
 
 		        @Override
 		        public void handle(MouseEvent event) {
+		        	try {
+		        		Strength passwordStrength = new Zxcvbn().measure(listView_CrackedPasswords.getSelectionModel().getSelectedItem().toString());
+			        	strength.setText(Integer.toString(passwordStrength.getScore()));
+			        	lblEstimatedCrackTime.setText(passwordStrength.getCrackTimesDisplay().getOfflineSlowHashing1e4perSecond());
+
+
+			        	lbl_DictionaryLists.setText("");
+			        
+			        	lbl_PatternsIdentified.setText("");
+			        	ArrayList<String> patternNames = new ArrayList<String>();
+						ArrayList<String> dictionaryNames = new ArrayList<String>();
+						for(Match m : passwordStrength.getSequence()) {
+						
+							if(m.pattern.name() != null && !patternNames.contains(m.pattern.name())) {
+								lbl_PatternsIdentified.setText(lbl_PatternsIdentified.getText() + " " + m.pattern.name());
+							}
+							
+							if(m.dictionaryName != null && !dictionaryNames.contains(m.dictionaryName)) {
+								lbl_DictionaryLists.setText(lbl_DictionaryLists.getText() + " " + m.dictionaryName);
+							}
+							
+							patternNames.add(m.pattern.name());
+							dictionaryNames.add(m.dictionaryName);
+			        	}
+			        	
+			        	
+
+		        	}catch(Exception e) {
+		        		System.out.println("Error on list view index changed: "+ e.getLocalizedMessage());
+		        	}
 		        	
-		        	strength.setText(Integer.toString(new Zxcvbn().measure(listView_CrackedPasswords.getSelectionModel().getSelectedItem().toString()).getScore()));
-		        
 		        }
 		    });
 		 
@@ -101,7 +141,7 @@ public class DictionaryAttackController {
 	}
 
 	public void beginAttack() {
-		Label[] passwordStatLabels = new Label[9];
+		Label[] passwordStatLabels = new Label[13];
 		passwordStatLabels[0] = lblTotalBeginningWithUppercase;
 		passwordStatLabels[1] = lblTotalBeginningWithLowercase;
 		passwordStatLabels[2] = lblTotalBeginningWithNumber;
@@ -111,8 +151,12 @@ public class DictionaryAttackController {
 		passwordStatLabels[6] = lblTotalWithStringNumberCombination;
 		passwordStatLabels[7] = lblAverageLettersPerWord;
 		passwordStatLabels[8] = lblAverageNumbersPerWord;
+		passwordStatLabels[9] = lblContainsAllSameCharacters;
+		passwordStatLabels[10] = lbl3OrMoreRepeating;
+		passwordStatLabels[11] = lbl5OrMoreRepeating;
+		passwordStatLabels[12] = lbl7OrMoreRepeating;
 
-
+		
 
 
 		Task<Long> timeTask = new Task<Long>() {
@@ -125,7 +169,7 @@ public class DictionaryAttackController {
 				while (true) {
 
 					seconds = watch.getTime(TimeUnit.SECONDS);
-					updateMessage(Long.toString(seconds / 60) + " minutes " + Long.toString(seconds % 60) + " seconds");
+					updateMessage(Long.toString(seconds / 60) + " minutes " + Long.toString(seconds % 60) + " sec.");
 
 					try {
 						Thread.sleep(1000);
@@ -143,7 +187,7 @@ public class DictionaryAttackController {
 			}
 		};
 
-		DictionaryAttackTask task = new DictionaryAttackTask(new File(dictionaryList.getFilePath()),
+		DictionaryAttackTask task = new DictionaryAttackTask(this.attackName, this.attackDescription,this.addFeedbackToPasswordList,new File(dictionaryList.getFilePath()),
 				selectedPasswordList, listView_CrackedPasswords, this.lbl_TotalCracked, this.lbl_TotalFailed,
 				this.getTotalWordsInDictionary(), this.totalWordsToCheckAtOnce, chart_WordLengthDistribution,
 				this.threadsForTotalPassword, s0, s1, s2, s3, s4, this.selectedOutputFile, passwordStatLabels);
@@ -163,12 +207,8 @@ public class DictionaryAttackController {
 			@Override
 			public void handle(WorkerStateEvent t) {
 				timeTask.cancel();
-				System.out.println("TASK Succeeded: " + task.getValue().getTotalWordsChecked());
-				System.out.println(task.getValue().getTotalBeginningWithLowercaseLetter()
-						+ " words begin with a lowercase letter");
-				System.out.println(task.getValue().getTotalWordsWithStringNumberCombination() + " word # combination");
-				System.out.println(task.getValue().getTotalBeginningWithUppercaseLetter()
-						+ " words begin with an uppercase letter");
+				System.out.println("TASK Succeeded.  Total Words Checked " + task.getValue().getTotalWordsChecked());
+				
 				timeThread.interrupt();
 
 			}
@@ -220,6 +260,14 @@ public class DictionaryAttackController {
 
 	public void setThreadsForTotalPassword(int threadsForTotalPassword) {
 		this.threadsForTotalPassword = threadsForTotalPassword;
+	}
+
+	public boolean isAddFeedbackToPasswordList() {
+		return addFeedbackToPasswordList;
+	}
+
+	public void setAddFeedbackToPasswordList(boolean addFeedbackToPasswordList) {
+		this.addFeedbackToPasswordList = addFeedbackToPasswordList;
 	}
 
 }

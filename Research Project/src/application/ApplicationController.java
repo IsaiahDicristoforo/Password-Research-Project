@@ -29,6 +29,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -124,6 +125,7 @@ public class ApplicationController {
 	@FXML private TextField threadsToDedicateToASinglePassword;
 	File crackedPasswordOutput;
 	@FXML Button selectOutputFile;
+	@FXML private CheckBox chxbxAddPasswordFeedback;
 	
 	public void chooseOutputFile() {
 		FileChooser chooser = new FileChooser();
@@ -147,7 +149,15 @@ public class ApplicationController {
 			controller.setTotalWordsToCheckAtOnce(Integer.parseInt(this.textField_TotalWordsToCheckAtOnce.getText()));
 			controller.setThreadsForTotalPassword(Integer.parseInt(this.threadsToDedicateToASinglePassword.getText()));
 			controller.setSelectedOutputFile(this.crackedPasswordOutput);
+			controller.attackName = tf_TestName.getText();
+			controller.attackDescription = ta_TestInformation.getText();
+			if(this.chxbxAddPasswordFeedback.isSelected()) {
+				controller.setAddFeedbackToPasswordList(true);
+			}else {
+				controller.setAddFeedbackToPasswordList(false);
+			}
 			controller.beginAttack();
+			
 			
 			Scene scene = new Scene(root);
 

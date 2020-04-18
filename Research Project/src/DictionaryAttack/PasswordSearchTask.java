@@ -7,6 +7,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
@@ -151,6 +153,30 @@ public class PasswordSearchTask extends Task<PasswordResult> {
 								 }
 								 if(result.isStringNumberCombination()) {
 									 passwordStatLabels[6].setText(Integer.toString(Integer.parseInt(passwordStatLabels[6].getText()) + 1));
+
+								 }
+								 if(result.ContainsAllLetters()) {
+									 passwordStatLabels[7].setText(Integer.toString(Integer.parseInt(passwordStatLabels[7].getText()) + 1));
+
+								 }
+								 if(result.ContainsAllNumbers()) {
+									 passwordStatLabels[8].setText(Integer.toString(Integer.parseInt(passwordStatLabels[8].getText()) + 1));
+
+								 }
+								 if(result.isContainsAllTheSameCharacters()) {
+									 passwordStatLabels[9].setText(Integer.toString(Integer.parseInt(passwordStatLabels[9].getText()) + 1));
+
+								 }
+								 if(result.isContains3OrMoreRepeatingCharacters()) {
+									 passwordStatLabels[10].setText(Integer.toString(Integer.parseInt(passwordStatLabels[10].getText()) + 1));
+
+								 }
+								 if(result.isContains5OrMoreRepeatingCharacters()) {
+									 passwordStatLabels[11].setText(Integer.toString(Integer.parseInt(passwordStatLabels[11].getText()) + 1));
+
+								 }
+								 if(result.isContains7OrMoreRepeatingCharacters()) {
+									 passwordStatLabels[12].setText(Integer.toString(Integer.parseInt(passwordStatLabels[12].getText()) + 1));
 
 								 }
 								 

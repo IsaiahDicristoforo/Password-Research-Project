@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -20,7 +21,7 @@
       </Label>
       <Pane layoutX="377.0" layoutY="97.0" prefHeight="142.0" prefWidth="850.0">
          <children>
-            <ProgressBar fx:id="pgb_OverallProgress" layoutX="105.0" layoutY="93.0" prefHeight="29.0" prefWidth="225.0" progress="0.0" />
+            <ProgressBar fx:id="pgb_OverallProgress" layoutX="63.0" layoutY="93.0" prefHeight="29.0" prefWidth="275.0" progress="0.0" />
             <Label layoutX="63.0" layoutY="45.0" text="Overall Progress" textFill="#f20d0d">
                <font>
                   <Font name="Arial Black" size="21.0" />
@@ -60,19 +61,19 @@
                </font></Label>
          </children>
       </Pane>
-      <ListView fx:id="listView_CrackedPasswords" layoutX="40.0" layoutY="222.0" prefHeight="538.0" prefWidth="260.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="174.0" prefHeight="39.0" prefWidth="260.0" text="Cracked Passwords" textAlignment="CENTER" textFill="#4c9e0d">
+      <ListView fx:id="listView_CrackedPasswords" layoutX="40.0" layoutY="334.0" prefHeight="462.0" prefWidth="260.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="292.0" prefHeight="39.0" prefWidth="260.0" text="Cracked Passwords" textAlignment="CENTER" textFill="#4c9e0d">
          <font>
             <Font size="27.0" />
          </font>
       </Label>
       <PieChart fx:id="chart_WordLengthDistribution" layoutX="336.0" layoutY="440.0" prefHeight="332.0" prefWidth="533.0" />
-      <Label layoutX="921.0" layoutY="449.0" prefHeight="36.0" prefWidth="224.0" text="Password Strength">
+      <Label layoutX="1024.0" layoutY="491.0" prefHeight="36.0" prefWidth="224.0" text="Password Strength">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <Pane layoutX="921.0" layoutY="497.0" prefHeight="218.0" prefWidth="589.0">
+      <Pane layoutX="1022.0" layoutY="522.0" prefHeight="218.0" prefWidth="455.0">
          <children>
             <GridPane prefHeight="205.0" prefWidth="542.0">
               <columnConstraints>
@@ -158,12 +159,24 @@
                   <Font name="Arial Black" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="19.0" layoutY="38.0" prefHeight="27.0" prefWidth="99.0" text="Strength:">
+            <Label layoutX="37.0" layoutY="38.0" prefHeight="27.0" prefWidth="99.0" text="Strength:">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="strength" layoutX="145.0" layoutY="39.0" prefHeight="27.0" prefWidth="80.0" text="_" textFill="#13d613">
+            <Label fx:id="strength" layoutX="136.0" layoutY="38.0" prefHeight="27.0" prefWidth="80.0" text="_" textFill="#13d613">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="36.0" layoutY="77.0" prefHeight="27.0" prefWidth="190.0" text="Estimated Crack Time">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Separator layoutX="29.0" layoutY="73.0" prefWidth="200.0" />
+            <Separator layoutX="29.0" layoutY="141.0" prefWidth="200.0" />
+            <Label fx:id="lblEstimatedCrackTime" alignment="CENTER" layoutX="30.0" layoutY="109.0" prefHeight="27.0" prefWidth="200.0" text="_" textFill="#13d613">
                <font>
                   <Font size="18.0" />
                </font>
@@ -172,12 +185,12 @@
       </Pane>
       <Pane layoutX="1129.0" layoutY="9.0" prefHeight="394.0" prefWidth="377.0">
          <children>
-            <Label alignment="CENTER" layoutX="14.0" layoutY="44.0" prefHeight="32.0" prefWidth="200.0" text="PasswordStats">
+            <Label alignment="CENTER" layoutX="14.0" layoutY="44.0" prefHeight="32.0" prefWidth="303.0" text="Password Stats">
                <font>
                   <Font name="Arial Black" size="22.0" />
                </font>
             </Label>
-            <GridPane layoutX="25.0" layoutY="88.0" prefHeight="279.0" prefWidth="333.0">
+            <GridPane layoutX="25.0" layoutY="88.0" prefHeight="332.0" prefWidth="333.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -192,70 +205,165 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Beginning W/ Uppercase" textFill="#149626" />
-                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Beginning With Lowercase" textFill="#149626" GridPane.rowIndex="1" />
-                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Beginning With Number" textFill="#149626" GridPane.rowIndex="2" />
-                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Average Letters Per Word" textFill="#149626" GridPane.rowIndex="7" />
-                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Average Numbers Per Word" textFill="#149626" GridPane.rowIndex="8" />
-                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="String # Combination" textFill="#149626" GridPane.rowIndex="6" />
-                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Ending With Number" textFill="#149626" GridPane.rowIndex="5" />
-                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Ending With Letter" textFill="#149626" GridPane.rowIndex="4" />
-                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Beginning With Letter" textFill="#149626" GridPane.rowIndex="3" />
-                  <Label fx:id="lblTotalBeginningWithUppercase" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1">
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Beginning W/ Uppercase" textFill="#149626">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Beginning With Lowercase" textFill="#149626" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Beginning With Number" textFill="#149626" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Containing ALL Letters" textFill="#f80d0d" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Containing ALL Numbers" textFill="#f80d0d" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="String # Combination" textFill="#149626" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Ending With Number" textFill="#149626" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Ending With Letter" textFill="#149626" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Beginning With Letter" textFill="#149626" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label fx:id="lblTotalBeginningWithUppercase" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblAverageNumbersPerWord" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                  <Label fx:id="lblAverageNumbersPerWord" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#f80d0d" GridPane.columnIndex="1" GridPane.rowIndex="8">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblAverageLettersPerWord" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                  <Label fx:id="lblAverageLettersPerWord" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#f80d0d" GridPane.columnIndex="1" GridPane.rowIndex="7">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblTotalWithStringNumberCombination" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                  <Label fx:id="lblTotalWithStringNumberCombination" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblTotalEndingWithNumber" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <Label fx:id="lblTotalEndingWithNumber" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblTotalEndingWithLetter" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <Label fx:id="lblTotalEndingWithLetter" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblTotalBeginningWithLetter" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Label fx:id="lblTotalBeginningWithLetter" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblTotalBeginningWithNumber" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Label fx:id="lblTotalBeginningWithNumber" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblTotalBeginningWithLowercase" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Label fx:id="lblTotalBeginningWithLowercase" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#149626" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="All characters the same" textFill="#f80d0d" GridPane.rowIndex="9">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label contentDisplay="TOP" prefHeight="20.0" prefWidth="160.0" text="3+ repeating characters" textFill="#f80d0d" GridPane.rowIndex="10">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="5+ repeating characters" textFill="#f80d0d" GridPane.rowIndex="11">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="7+ repeating characters" textFill="#f80d0d" GridPane.rowIndex="12">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbl7OrMoreRepeating" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#f80d0d" GridPane.columnIndex="1" GridPane.rowIndex="12">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbl5OrMoreRepeating" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#f80d0d" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbl3OrMoreRepeating" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#f80d0d" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblContainsAllSameCharacters" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="151.0" text="0" textFill="#f80d0d" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                     <font>
+                        <Font size="25.0" />
                      </font>
                   </Label>
                </children>
             </GridPane>
          </children>
       </Pane>
-      <Label layoutX="1211.0" layoutY="448.0" prefHeight="36.0" prefWidth="224.0" text="Cracked">
+      <Label layoutX="1332.0" layoutY="491.0" prefHeight="36.0" prefWidth="175.0" text="Total Cracked">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
+      <Separator layoutX="422.0" layoutY="242.0" prefHeight="48.0" prefWidth="568.0" />
+      <Separator layoutX="415.0" layoutY="82.0" prefHeight="48.0" prefWidth="568.0" />
+      <Label alignment="CENTER" layoutX="66.0" layoutY="163.0" prefHeight="27.0" prefWidth="195.0" text="Patterns Identified">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_PatternsIdentified" alignment="CENTER" layoutX="26.0" layoutY="192.0" prefHeight="27.0" prefWidth="275.0" text="_">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Separator layoutX="63.0" layoutY="222.0" prefWidth="200.0" />
+      <Label alignment="CENTER" layoutX="66.0" layoutY="225.0" prefHeight="27.0" prefWidth="195.0" text="Dictionarys Found In">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_DictionaryLists" alignment="CENTER" layoutX="34.0" layoutY="250.0" prefHeight="32.0" prefWidth="258.0" text="_">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Separator layoutX="70.0" layoutY="291.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

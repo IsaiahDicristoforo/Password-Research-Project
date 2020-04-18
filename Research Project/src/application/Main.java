@@ -27,12 +27,9 @@ import javafx.scene.layout.BorderPane;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
-		
-		
-		
 		try {
 			
-		/*	BufferedReader reader = new BufferedReader(new FileReader("C:\\Dictionary Research Project\\Rocktastic12a\\Rocktastic12a.txt"));
+			/*BufferedReader reader = new BufferedReader(new FileReader("C:\\Dictionary Research Project\\Rocktastic12a\\Rocktastic12a.txt"));
 			
 			BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Dictionary Research Project\\hashedRocktastic.txt"));
 			
@@ -42,14 +39,15 @@ public class Main extends Application {
 				writer.newLine();
 				s= reader.readLine();
 			}
-			*/
-								 
+			
+				*/				 
 			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("Application.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			primaryStage.setResizable(false);
+			
 			
 		} catch(Exception e) {
 			e.printStackTrace();
